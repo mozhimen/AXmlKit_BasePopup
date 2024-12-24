@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/../AAnimKit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../AImageKit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../ALibKit_Google" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../ALibKit_Squareup" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../APostKit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../ARxKit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../AStackKit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../ATaskKit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../AXmlKit" vcs="Git" />
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../KUtilKit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../SwiftKit" vcs="Git" />
   </component>
 </project>

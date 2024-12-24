@@ -1,134 +1,134 @@
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
-
-
-File secretPropsFile = project.rootProject.file('local.properties')
-if (secretPropsFile.exists()) {
-    println "Found secret props file, loading props"
-    Properties p = new Properties()
-    p.load(new FileInputStream(secretPropsFile))
-    p.each { name, value ->
-        ext[name] = value
-    }
-}
-
-def getLocalProperty(key) {
-    if (ext.has(key)) {
-        return ext[key]
-    }
-    return ""
-}
-
-def isReleaseBuild() {
-    return !rootProject.ext.candy
-}
-
-def getReleaseRepositoryUrl() {
-    return "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-}
-
-def getSnapshotRepositoryUrl() {
-    return "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            publishBasePopup(MavenPublication) {
-                from components.release
-
-                groupId = rootProject.ext.group
-                artifactId = rootProject.ext.pkg_name
-                version = rootProject.ext.versionName
-
-                pom {
-                    name = rootProject.ext.pkg_name
-                    packaging = 'aar'
-                    description = 'Android下打造通用便捷的PopupWindow弹窗库'
-                    url = 'https://github.com/razerdp/BasePopup'
-                    scm {
-                        url = 'https://github.com/razerdp/BasePopup'
-                        connection = 'https://github.com/razerdp/BasePopup.git'
-                        developerConnection = 'https://github.com/razerdp/BasePopup.git'
-                    }
-
-                    licenses {
-                        license {
-                            name = 'The Apache Software License, Version 2.0'
-                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id = 'razerdp'
-                            name = 'razerdp'
-                            email = 'razerdp123@gmail.com'
-                        }
-                    }
-                }
-            }
-        }
-        repositories {
-            maven {
-                url = isReleaseBuild() ? getReleaseRepositoryUrl() : getSnapshotRepositoryUrl()
-                credentials {
-                    username = getLocalProperty('ossrhUsername')
-                    password = getLocalProperty('ossrhPassword')
-                }
-            }
-        }
-    }
-
-    signing {
-        sign publishing.publications.publishBasePopup
-    }
-
-    task androidJavadocs(type: Javadoc) {
-        source = android.sourceSets.main.java.srcDirs
-        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    }
-
-    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-        archiveClassifier.set('javadoc')
-        from androidJavadocs.destinationDir
-    }
-
-    task androidSourcesJar(type: Jar) {
-        archiveClassifier.set('sources')
-        from android.sourceSets.main.java.sourceFiles
-    }
-
-    allprojects {
-        tasks.withType(Javadoc) {
-            options {
-                encoding "UTF-8"
-                charSet 'UTF-8'
-                author true
-                failOnError false
-                version true
-                links "https://developer.android.google.cn/reference/"
-            }
-        }
-    }
-
-    if (JavaVersion.current().isJava8Compatible()) {
-        allprojects {
-            tasks.withType(Javadoc) {
-                options.addStringOption('Xdoclint:none', '-quiet')
-            }
-        }
-    }
-    if (JavaVersion.current().isJava9Compatible()) {
-        allprojects {
-            tasks.withType(Javadoc) {
-                options.addBooleanOption('html5', true)
-            }
-        }
-    }
-
-    artifacts {
-        archives androidSourcesJar
-        archives androidJavadocsJar
-    }
-}
+//apply plugin: 'maven-publish'
+//apply plugin: 'signing'
+//
+//
+//File secretPropsFile = project.rootProject.file('local.properties')
+//if (secretPropsFile.exists()) {
+//    println "Found secret props file, loading props"
+//    Properties p = new Properties()
+//    p.load(new FileInputStream(secretPropsFile))
+//    p.each { name, value ->
+//        ext[name] = value
+//    }
+//}
+//
+//def getLocalProperty(key) {
+//    if (ext.has(key)) {
+//        return ext[key]
+//    }
+//    return ""
+//}
+//
+//def isReleaseBuild() {
+//    return !rootProject.ext.candy
+//}
+//
+//def getReleaseRepositoryUrl() {
+//    return "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+//}
+//
+//def getSnapshotRepositoryUrl() {
+//    return "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+//}
+//
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            publishBasePopup(MavenPublication) {
+//                from components.release
+//
+//                groupId = rootProject.ext.group
+//                artifactId = rootProject.ext.pkg_name
+//                version = rootProject.ext.versionName
+//
+//                pom {
+//                    name = rootProject.ext.pkg_name
+//                    packaging = 'aar'
+//                    description = 'Android下打造通用便捷的PopupWindow弹窗库'
+//                    url = 'https://github.com/razerdp/BasePopup'
+//                    scm {
+//                        url = 'https://github.com/razerdp/BasePopup'
+//                        connection = 'https://github.com/razerdp/BasePopup.git'
+//                        developerConnection = 'https://github.com/razerdp/BasePopup.git'
+//                    }
+//
+//                    licenses {
+//                        license {
+//                            name = 'The Apache Software License, Version 2.0'
+//                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                        }
+//                    }
+//
+//                    developers {
+//                        developer {
+//                            id = 'razerdp'
+//                            name = 'razerdp'
+//                            email = 'razerdp123@gmail.com'
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        repositories {
+//            maven {
+//                url = isReleaseBuild() ? getReleaseRepositoryUrl() : getSnapshotRepositoryUrl()
+//                credentials {
+//                    username = getLocalProperty('ossrhUsername')
+//                    password = getLocalProperty('ossrhPassword')
+//                }
+//            }
+//        }
+//    }
+//
+//    signing {
+//        sign publishing.publications.publishBasePopup
+//    }
+//
+//    task androidJavadocs(type: Javadoc) {
+//        source = android.sourceSets.main.java.srcDirs
+//        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//    }
+//
+//    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+//        archiveClassifier.set('javadoc')
+//        from androidJavadocs.destinationDir
+//    }
+//
+//    task androidSourcesJar(type: Jar) {
+//        archiveClassifier.set('sources')
+//        from android.sourceSets.main.java.sourceFiles
+//    }
+//
+//    allprojects {
+//        tasks.withType(Javadoc) {
+//            options {
+//                encoding "UTF-8"
+//                charSet 'UTF-8'
+//                author true
+//                failOnError false
+//                version true
+//                links "https://developer.android.google.cn/reference/"
+//            }
+//        }
+//    }
+//
+//    if (JavaVersion.current().isJava8Compatible()) {
+//        allprojects {
+//            tasks.withType(Javadoc) {
+//                options.addStringOption('Xdoclint:none', '-quiet')
+//            }
+//        }
+//    }
+//    if (JavaVersion.current().isJava9Compatible()) {
+//        allprojects {
+//            tasks.withType(Javadoc) {
+//                options.addBooleanOption('html5', true)
+//            }
+//        }
+//    }
+//
+//    artifacts {
+//        archives androidSourcesJar
+//        archives androidJavadocsJar
+//    }
+//}

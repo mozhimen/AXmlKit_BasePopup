@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
+    namespace 'razerdp.basepopup'
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
@@ -25,13 +28,16 @@ android {
         }
     }
 
-    viewBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding true
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 
     dexOptions {
@@ -39,59 +45,38 @@ android {
         preDexLibraries = true
         maxProcessCount = 4
     }
-    lint {
+    lintOptions {
+        checkReleaseBuilds false
         abortOnError false
     }
-    namespace 'razerdp.basepopup'
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-
-    // android
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
-
-    implementation 'androidx.multidex:multidex:2.0.1'
-
-    implementation 'com.github.razerdp:StrokeLayouts:1.0.0'
+    implementation project(":SwiftKit:basick")
     implementation project(path: ':lib')
 
-    implementation('com.github.bumptech.glide:glide:4.11.0') {
-        exclude group: "android.support"
-    }
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-    implementation "com.github.bumptech.glide:okhttp3-integration:4.11.0"
-
+    implementation 'com.github.razerdp:StrokeLayouts:1.0.0'
     implementation 'com.caverock:androidsvg:1.2.1'
-
-    //net
-    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
-    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.10.0'
-    //gson
-    implementation 'com.google.code.gson:gson:2.8.6'
-
     //懒得封装webview而用的库
     implementation 'com.just.agentweb:agentweb:4.1.3'
-
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
     implementation 'pub.devrel:easypermissions:3.0.0'
-    // rx
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.14'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'com.ljx.rxlife2:rxlife-rxjava:2.0.0'
-
     implementation 'com.contrarywind:Android-PickerView:4.1.8'
-
     implementation "com.davemorrissey.labs:subsampling-scale-image-view:3.10.0"
-
-    implementation 'com.ljx.rxhttp:rxhttp:2.5.7'
-    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
-    annotationProcessor 'com.ljx.rxhttp:rxhttp-compiler:2.5.7'
-
     implementation 'com.kaopiz:kprogresshud:1.0.2'
 
+    implementation project(":AImageKit:imagek_glide")
+    kapt 'com.github.bumptech.glide:compiler:4.16.0'
 
+    //net
+    implementation project(":ALibKit_Squareup:okhttp3")
+    implementation project(":ALibKit_Squareup:okhttp3_urlconnection")
+    //gson
+    implementation project(':ALibKit_Google:gson')
+    // rx
+    implementation project(':ARxKit:rxk_rxjava2')
+    implementation project(':ARxKit:rxk_rxlife2')
+    implementation project(':ARxKit:rxk_rxhttp')
+    kapt 'com.ljx.rxhttp:rxhttp-compiler:2.5.7'
 }

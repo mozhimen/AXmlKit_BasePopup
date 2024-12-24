@@ -1,1 +1,77 @@
-include ':app', ':lib'
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        maven { url "https://raw.githubusercontent.com/Pgyer/mvn_repo_pgyer/master" }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url 'https://maven.aliyun.com/repository/grails-core' }
+        maven { url 'https://raw.githubusercontent.com/saki4510t/libcommon/master/repository/' }
+        maven { url 'https://gitee.com/liuchaoya/libcommon/raw/master/repository/' }
+        maven { url "https://repo.eclipse.org/content/repositories/paho-snapshots/" }
+        maven { url 'https://developer.huawei.com/repo/' }
+        maven { url "https://jitpack.io" }
+        maven { url 'https://www.jitpack.io' }
+        mavenCentral()
+        google()
+        jcenter()
+    }
+}
+
+include ':app'
+include ':lib'
+include ':popwink_basepopup'
+//ALibKit_Squareup
+include ':ALibKit_Squareup'
+project(':ALibKit_Squareup').projectDir = new File("D:\\WorkSpace\\GitHub\\ALibKit_Squareup")
+include ':ALibKit_Squareup:okhttp3'
+include ':ALibKit_Squareup:okhttp3_urlconnection'
+//ALibKit_Google
+include ':ALibKit_Google'
+project(':ALibKit_Google').projectDir = new File("D:\\WorkSpace\\GitHub\\ALibKit_Google")
+include ':ALibKit_Google:gson'
+//SwiftKit
+include ':SwiftKit'
+project(':SwiftKit').projectDir = new File("D:\\WorkSpace\\GitHub\\SwiftKit")
+include ':SwiftKit:basick'
+include ':SwiftKit:blurk'
+include ':SwiftKit:xmlk'
+//KUtilKit
+include ':KUtilKit'
+project(':KUtilKit').projectDir = new File("D:\\WorkSpace\\GitHub\\KUtilKit")
+include ':KUtilKit:utilk_android'
+include ':KUtilKit:utilk_kotlin'
+//AImageKit
+include ':AImageKit'
+project(':AImageKit').projectDir = new File("D:\\WorkSpace\\GitHub\\AImageKit")
+include ':AImageKit:imagek_glide'
+include ':AImageKit:imagek_glide_blur'
+//ARxKit
+include ':ARxKit'
+project(':ARxKit').projectDir = new File("D:\\WorkSpace\\GitHub\\ARxKit")
+include ':ARxKit:rxk_rxjava2'
+include ':ARxKit:rxk_rxlife2'
+include ':ARxKit:rxk_rxhttp'
+//ATaskKit
+include ':ATaskKit'
+project(':ATaskKit').projectDir = new File("D:\\WorkSpace\\GitHub\\ATaskKit")
+include ':ATaskKit:taskk_executor'
+//AAnimKit
+include ':AAnimKit'
+project(':AAnimKit').projectDir = new File("D:\\WorkSpace\\GitHub\\AAnimKit")
+include ':AAnimKit:animk_builder'
+//APostKit
+include ':APostKit'
+project(':APostKit').projectDir = new File("D:\\WorkSpace\\GitHub\\APostKit")
+include ':APostKit:postk_livedata'
+//AStackKit
+include ':AStackKit'
+project(':AStackKit').projectDir = new File("D:\\WorkSpace\\GitHub\\AStackKit")
+include ':AStackKit:stackk_basic'
+include ':AStackKit:stackk_callback'
+//AXmlKit
+include ':AXmlKit'
+project(':AXmlKit').projectDir = new File("D:\\WorkSpace\\GitHub\\AXmlKit")
+include ':AXmlKit:imagek_blur'

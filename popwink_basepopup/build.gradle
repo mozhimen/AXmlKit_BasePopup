@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.mozhimen.xmlk.popwink.basepopup'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 19
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+}
+
+dependencies {
+    implementation project(":KUtilKit:utilk_android")
+    implementation project(':AAnimKit:animk_builder')
+    implementation project(':SwiftKit:blurk')
+    implementation project(':SwiftKit:xmlk')
+    implementation project(':APostKit:postk_livedata')
+    implementation project(':AStackKit:stackk_callback')
+    implementation project(':AXmlKit:imagek_blur')
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+}
